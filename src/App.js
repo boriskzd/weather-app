@@ -1,22 +1,17 @@
 import React from 'react';
-import { Counter } from './components/Counter';
-import { Weather } from './components/Weather';
-import { Container, CssBaseline, Grid } from '@mui/material';
+import { Box, Container, CssBaseline } from '@mui/material';
+
+import Weather from './components/Weather';
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth='md'>
-        <div className='App'>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Weather />
-              <Counter />
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
+      <Box sx={{ backgroundColor: '#00003f', paddingBottom: '50px' }}>
+        <Container maxWidth='sm'>
+          <Weather />
+        </Container>
+      </Box>
     </>
   );
 }

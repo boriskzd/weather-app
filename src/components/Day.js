@@ -1,7 +1,7 @@
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 
 const Day = (day) => {
-  console.log(day);
+  // console.log(day);
 
   const daysOfWeek = [
     'Monday',
@@ -23,27 +23,29 @@ const Day = (day) => {
   const icon = `http://openweathermap.org/img/wn/${day.day.weather[0].icon}@2x.png`;
 
   return (
-    <Grid item xs>
-      <Paper variant='outlined' elevation={0}>
-        <Box sx={{ color: 'text.primary', textAlign: 'center' }}>{day2}</Box>
+    <Paper variant='outlined' sx={{ width: 80, marginBottom: '5px' }}>
+      <Typography
+        sx={{ color: 'text.secondary', textAlign: 'center', fontSize: 14 }}
+      >
+        {day2}
+      </Typography>
 
-        <div style={{ width: '100%' }}>
-          <img src={icon} alt={weather} width='100%' />
-        </div>
+      <div style={{ width: '100%' }}>
+        <img src={icon} alt={weather} width='80px' height='80px' />
+      </div>
 
-        <Typography
-          sx={{ color: 'text.secondary', textAlign: 'center', fontSize: 12 }}
-        >
-          {weather}
-        </Typography>
+      <Typography
+        sx={{ color: 'text.primary', textAlign: 'center', fontSize: 14 }}
+      >
+        {maxTemp}°- {minTemp}°
+      </Typography>
 
-        <Typography
-          sx={{ color: 'text.primary', textAlign: 'center', fontSize: 16 }}
-        >
-          {maxTemp} - {minTemp}
-        </Typography>
-      </Paper>
-    </Grid>
+      <Typography
+        sx={{ color: 'text.secondary', textAlign: 'center', fontSize: 10 }}
+      >
+        {weather}
+      </Typography>
+    </Paper>
   );
 };
 
