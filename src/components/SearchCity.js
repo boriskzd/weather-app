@@ -1,0 +1,89 @@
+import { useState } from 'react';
+import { Autocomplete, Box, Paper, TextField } from '@mui/material';
+
+import { useGetCitiesQuery } from '../app/weatherApi';
+import { useDispatch } from 'react-redux';
+
+import { setLatLong } from '../app/weatherSlice';
+
+const SearchCity = () => {
+  const [searchCity, setSearchCity] = useState('');
+
+  const {
+    data,
+    //  error,
+    isLoading,
+  } = useGetCitiesQuery(searchCity);
+
+  const dispatch = useDispatch();
+
+  let array = [];
+
+  // console.log('loading: ', isLoading);
+  // console.log(data);
+
+  if (!isLoading && data !== undefined) {
+    array = data;
+  }
+
+  const handleTyping = (event) => {
+    setSearchCity(event.target.value);
+  };
+
+  const handleSelect = (e, value) => {
+    console.log('handle select');
+    console.log(value);
+    console.log(value.lat);
+    dispatch(setLatLong(value));
+  };
+
+  const handleSubmit = (event) => {
+    console.log(event);
+  };
+
+  return (
+    <Paper>
+      <Box sx={{ marginBottom: 2 }}>
+        <form onSubmit={handleSubmit}>
+          <Autocomplete
+            disablePortal
+            id='search-city-autocomplete'
+            // sx={{ width: 300 }}
+            onChange={handleSelect}
+            options={array}
+            getOptionLabel={(option) =>
+              // `${option.name}, ${option.country}, ${option.state},  ${option.lat},  ${option.lon}`
+              `${option.name}, ${option.country}`
+            }
+            renderOption={(props, option) => (
+              <Box
+                component='li'
+                sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                {...props}
+                key={Math.random()}
+              >
+                <img
+                  width='24'
+                  src={`https://flagcdn.com/${option.country.toLowerCase()}.svg`}
+                  alt=''
+                  style={{ boxShadow: '1px 1px 4px #bbb' }}
+                />
+                {option.name} ({option.country})
+              </Box>
+            )}
+            renderInput={(params) => (
+              <TextField
+                label='Search City'
+                variant='filled'
+                onChange={handleTyping}
+                {...params}
+              />
+            )}
+          />
+        </form>
+      </Box>
+    </Paper>
+  );
+};
+
+export default SearchCity;
