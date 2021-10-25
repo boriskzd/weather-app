@@ -160,16 +160,29 @@ export default function WeatherChart(prognoza) {
         <CartesianGrid strokeDasharray='3 6' />
         <XAxis dataKey='time' interval={2} tick={renderTime} />
 
+        {/* Other  */}
         <Legend />
-
         <Tooltip
-          // content={<CustomTooltip />}
-          formatter={(value, name, props) => [
-            `temp: ${value}`,
-            `formatted name ${name}`,
-            `props props ${props}`,
-          ]}
-          payload={[{ name: '05-01', value: 12, pop: 'kg' }]}
+          labelFormatter={(value, name, props) => `Time: ${value}:00 h`}
+          formatter={(value, name, props) => {
+            let nameHtml = '';
+            console.log(name);
+            console.log(value);
+            console.log(props);
+
+            switch (name) {
+              case 'Temperature °C':
+                nameHtml = `Temp: ${value} °C`;
+                break;
+              case 'Precipitation %':
+                nameHtml = `Rain: ${value} % chance`;
+                break;
+              default:
+                nameHtml = 'Default: ' + value;
+            }
+
+            return [nameHtml];
+          }}
         />
       </ComposedChart>
     </ResponsiveContainer>

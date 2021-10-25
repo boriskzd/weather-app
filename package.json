@@ -1,4 +1,5 @@
 {
+  "homepage": "https://boriskzd.github.io/weather-app",
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
@@ -39,6 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://boriskzd.github.io/weather-app/"
+  }
 }

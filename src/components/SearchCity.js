@@ -37,8 +37,9 @@ const SearchCity = () => {
     dispatch(setLatLong(value));
   };
 
-  const handleSubmit = (event) => {
-    console.log(event);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: select first option when clicking enter
   };
 
   return (
