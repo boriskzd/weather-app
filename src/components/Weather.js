@@ -15,6 +15,7 @@ import WeatherChart from './WeatherChart';
 
 import { useGetWeatherByCityQuery } from '../app/weatherApi';
 import { useSelector } from 'react-redux';
+import NextWeek from './NextWeek';
 
 export default function Weather() {
   const latLong = useSelector((state) => state.weather);
@@ -42,15 +43,13 @@ export default function Weather() {
       >
         Weather App
       </Typography>
+
       <SearchCity />
+
       <Paper elevation={0}>
         <Card>
           <CardContent>
             <CurrentWeather data={data.current} />
-
-            <Divider>
-              <Chip label='Daily' size='small' />
-            </Divider>
 
             <WeatherChart prognoza={data.hourly} />
 
@@ -58,20 +57,7 @@ export default function Weather() {
               <Chip label='Next 7 days' size='small' />
             </Divider>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexFlow: 'row nowrap',
-                gap: '5px',
-                overflowY: 'auto',
-                minWidth: 240,
-                marginTop: '10px',
-              }}
-            >
-              {data.daily.map((day) => {
-                return <Day day={day} key={day.dt} />;
-              })}
-            </Box>
+            <NextWeek data={data} />
           </CardContent>
         </Card>
       </Paper>

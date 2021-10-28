@@ -49,13 +49,10 @@ const SearchCity = () => {
           <Autocomplete
             disablePortal
             id='search-city-autocomplete'
-            // sx={{ width: 300 }}
+            autoHighlight
             onChange={handleSelect}
             options={array}
-            getOptionLabel={(option) =>
-              // `${option.name}, ${option.country}, ${option.state},  ${option.lat},  ${option.lon}`
-              `${option.name}, ${option.country}`
-            }
+            getOptionLabel={(option) => `${option.name}, ${option.country}`}
             renderOption={(props, option) => (
               <Box
                 component='li'

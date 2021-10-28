@@ -1,18 +1,8 @@
 import { Paper, Typography } from '@mui/material';
 
+import { daysOfWeek } from '../utils/weatherUtils';
+
 const Day = (day) => {
-  // console.log(day);
-
-  const daysOfWeek = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
-
   const dayOfWeek = new Date(day.day.dt * 1000).getDay();
 
   const day2 = daysOfWeek[dayOfWeek].slice(0, 3);
@@ -20,7 +10,7 @@ const Day = (day) => {
   const minTemp = Math.round(day.day.temp.min);
   const maxTemp = Math.round(day.day.temp.max);
   const weather = day.day.weather[0].description;
-  const icon = `http://openweathermap.org/img/wn/${day.day.weather[0].icon}@2x.png`;
+  const icon = `https://openweathermap.org/img/wn/${day.day.weather[0].icon}@2x.png`;
 
   return (
     <Paper variant='outlined' sx={{ width: 80, marginBottom: '5px' }}>

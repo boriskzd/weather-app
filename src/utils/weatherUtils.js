@@ -35,3 +35,13 @@ export const visibilityMetersOrKm = (visibility) => {
 
   return visibilityText;
 };
+
+export const daysOfWeek = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];

@@ -10,7 +10,7 @@ const CurrentWeather = (data) => {
 
   const cityName = `${latLong.name}, ${latLong.country}`;
 
-  const icon = `http://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`;
+  const icon = `https://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`;
   const desc = data.data.weather[0].description;
   const descSentence = desc[0].toUpperCase() + desc.slice(1) + '.';
 
