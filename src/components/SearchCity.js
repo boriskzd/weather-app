@@ -4,16 +4,12 @@ import { Autocomplete, Box, Paper, TextField } from '@mui/material';
 import { useGetCitiesQuery } from '../app/weatherApi';
 import { useDispatch } from 'react-redux';
 
-import { setLatLong } from '../app/weatherSlice';
+import { setCurrentLocation } from '../app/weatherSlice';
 
 const SearchCity = () => {
   const [searchCity, setSearchCity] = useState('');
 
-  const {
-    data,
-    //  error,
-    isLoading,
-  } = useGetCitiesQuery(searchCity);
+  const { data, error, isLoading } = useGetCitiesQuery(searchCity);
 
   const dispatch = useDispatch();
 
@@ -34,7 +30,7 @@ const SearchCity = () => {
     console.log('handle select');
     console.log(value);
     console.log(value.lat);
-    dispatch(setLatLong(value));
+    dispatch(setCurrentLocation(value));
   };
 
   const handleSubmit = (e) => {

@@ -14,15 +14,20 @@ import {
 
 import { daysOfWeek } from '../utils/weatherUtils';
 
-export default function WeatherChart(prognoza) {
-  let newData = prognoza.prognoza.slice(0, 24);
+export default function WeatherChart(data) {
+  let newData = data.data.slice(0, 24);
 
   let minTemp = 100;
   let maxTemp = -100;
 
   // let currentDay = new Date(obj.dt * 1000).getDay();
-  const currentDayOfWeek =
-    daysOfWeek[new Date(prognoza.prognoza[0].dt * 1000).getDay()];
+  // const today = new Date();
+  // const currentDayOfWeek = daysOfWeek[today.getDay()];
+  // const dayOfMonth = today.getDay();
+  // const month = today.getMonth();
+  // console.log(month, dayOfMonth);
+
+  // daysOfWeek[new Date(data.data[0].dt * 1000).getDay()];
 
   newData = newData.map((obj) => {
     let newObj = {};
@@ -120,7 +125,7 @@ export default function WeatherChart(prognoza) {
   return (
     <>
       <Divider>
-        <Chip label={`Today - ${currentDayOfWeek}`} size='small' />
+        <Chip label={`Next 24 hours`} size='small' />
       </Divider>
 
       <ResponsiveContainer width='100%' height={250}>

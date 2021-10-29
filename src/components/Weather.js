@@ -1,5 +1,4 @@
 import {
-  Box,
   Card,
   CardContent,
   Chip,
@@ -8,7 +7,6 @@ import {
   Typography,
 } from '@mui/material';
 
-import Day from './Day';
 import SearchCity from './SearchCity';
 import CurrentWeather from './CurrentWeather';
 import WeatherChart from './WeatherChart';
@@ -20,17 +18,15 @@ import NextWeek from './NextWeek';
 export default function Weather() {
   const latLong = useSelector((state) => state.weather);
 
-  console.log(`lat long: `);
-  console.log(latLong);
+  const { data, error, isLoading } = useGetWeatherByCityQuery(latLong);
 
-  const {
-    data,
-    //  error,
-    isLoading,
-  } = useGetWeatherByCityQuery(latLong);
-  console.log(data);
+  // console.log(data);
 
-  const loadingHtml = <div>Is Loading...</div>;
+  const loadingHtml = (
+    <div style={{ color: 'white', textAlign: 'center' }}>
+      <div>Loading...</div>
+    </div>
+  );
 
   if (isLoading) return loadingHtml;
 
@@ -51,7 +47,7 @@ export default function Weather() {
           <CardContent>
             <CurrentWeather data={data.current} />
 
-            <WeatherChart prognoza={data.hourly} />
+            <WeatherChart data={data.hourly} />
 
             <Divider>
               <Chip label='Next 7 days' size='small' />

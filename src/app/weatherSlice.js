@@ -12,7 +12,7 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState: initialState,
   reducers: {
-    setLatLong: (state, action) => {
+    setCurrentLocation: (state, action) => {
       state.lat = action.payload.lat;
       state.lon = action.payload.lon;
       state.country = action.payload.country;
@@ -21,6 +21,6 @@ export const weatherSlice = createSlice({
   },
 });
 
-export const { setLatLong } = weatherSlice.actions;
+export const { setCurrentLocation } = weatherSlice.actions;
 
 export default weatherSlice.reducer;
