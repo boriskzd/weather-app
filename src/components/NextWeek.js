@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import Day from './Day';
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export default function NextWeek(data) {
   return (

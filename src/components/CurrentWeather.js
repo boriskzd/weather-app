@@ -11,7 +11,7 @@ const CurrentWeather = (data) => {
   const currentLocation = useSelector((state) => state.weather);
 
   const cityName = `${currentLocation.name}, ${currentLocation.country}`;
-  console.log(data.data);
+  // console.log(data.data);
   const icon = `https://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`;
   const desc = data.data.weather[0].description;
   const descSentence = desc[0].toUpperCase() + desc.slice(1);
@@ -20,7 +20,6 @@ const CurrentWeather = (data) => {
   const currentDayOfWeek = daysOfWeek[today.getDay()];
   const dayOfMonth = today.getDate();
   const month = today.getMonth();
-  console.log(currentDayOfWeek, months[month], dayOfMonth);
   const dateText = `${currentDayOfWeek}, ${months[month]} ${dayOfMonth}`;
 
   const {
@@ -38,20 +37,20 @@ const CurrentWeather = (data) => {
   const windDir = calculateWindDirection(wind_deg);
   const visibilityText = visibilityMetersOrKm(visibility);
 
-  const styles = (theme) => ({
-    root: {
-      padding: theme.spacing(1),
-      [theme.breakpoints.down('md')]: {
-        backgroundColor: theme.palette.secondary.main,
-      },
-      [theme.breakpoints.up('md')]: {
-        backgroundColor: theme.palette.primary.main,
-      },
-      [theme.breakpoints.up('lg')]: {
-        backgroundColor: green[500],
-      },
-    },
-  });
+  // const styles = (theme) => ({
+  //   root: {
+  //     padding: theme.spacing(1),
+  //     [theme.breakpoints.down('md')]: {
+  //       backgroundColor: theme.palette.secondary.main,
+  //     },
+  //     [theme.breakpoints.up('md')]: {
+  //       backgroundColor: theme.palette.primary.main,
+  //     },
+  //     // [theme.breakpoints.up('lg')]: {
+  //     //   backgroundColor: green[500],
+  //     // },
+  //   },
+  // });
 
   const textTitle = { color: 'text.secondary', paddingRight: 0.5 };
 
@@ -78,15 +77,27 @@ const CurrentWeather = (data) => {
       <Grid container alignItems='center'>
         <Grid item xs={12} sm={4}>
           <Box
-            sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
-            <img src={icon} alt={desc} width='100px' height='100px' />
-            <Typography variant='h5'>{Math.round(temp)} °C</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <img src={icon} alt={desc} width='100px' height='100px' />
+              <Typography variant='h5'>{Math.round(temp)} °C</Typography>
+            </Box>
+            <Typography variant='subtitle1' align='center'>
+              {descSentence}
+              {/* Feels like {Math.round(feels_like)} °C. */}
+            </Typography>
           </Box>
-          <Typography variant='subtitle1' align='center'>
-            {descSentence}
-            {/* Feels like {Math.round(feels_like)} °C. */}
-          </Typography>
         </Grid>
 
         <Grid item xs={12} sm={8}>

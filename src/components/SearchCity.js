@@ -9,7 +9,11 @@ import { setCurrentLocation } from '../app/weatherSlice';
 const SearchCity = () => {
   const [searchCity, setSearchCity] = useState('');
 
-  const { data, error, isLoading } = useGetCitiesQuery(searchCity);
+  const {
+    data,
+    // error,
+    isLoading,
+  } = useGetCitiesQuery(searchCity);
 
   const dispatch = useDispatch();
 

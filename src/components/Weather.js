@@ -18,7 +18,11 @@ import NextWeek from './NextWeek';
 export default function Weather() {
   const latLong = useSelector((state) => state.weather);
 
-  const { data, error, isLoading } = useGetWeatherByCityQuery(latLong);
+  const {
+    data,
+    // error,
+    isLoading,
+  } = useGetWeatherByCityQuery(latLong);
 
   // console.log(data);
 
