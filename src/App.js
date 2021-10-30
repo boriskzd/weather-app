@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ backgroundColor: '#00003f', paddingBottom: '50px' }}>
+      <Box sx={{ backgroundColor: '#012454', paddingBottom: '50px' }}>
         <Container maxWidth='sm'>
           <Weather />
         </Container>
