@@ -9,6 +9,7 @@ import Thunder from '../assets/amcharts_weather_icons_1_0_0/animated/thunder.svg
 import CloudyAtmosphere from '../assets/amcharts_weather_icons_1_0_0/animated/cloudy.svg';
 import Weather from '../assets/amcharts_weather_icons_1_0_0/animated/weather.svg';
 // icons are from: https://www.amcharts.com/free-animated-svg-weather-icons/
+// weather condigitons: https://openweathermap.org/weather-conditions
 
 export const findIcon = (typeOfWeather) => {
   console.log(
