@@ -6,6 +6,7 @@ import {
   calculateWindDirection,
   visibilityMetersOrKm,
 } from '../utils/weatherUtils';
+import { findIcon } from '../utils/icons';
 
 const CurrentWeather = (data) => {
   const currentLocation = useSelector((state) => state.weather);
@@ -13,6 +14,8 @@ const CurrentWeather = (data) => {
   const cityName = `${currentLocation.name}, ${currentLocation.country}`;
   // console.log(data.data);
   const icon = `https://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`;
+  const svgIcon = findIcon(data.data.weather[0]);
+
   const desc = data.data.weather[0].description;
   const descSentence = desc[0].toUpperCase() + desc.slice(1);
 
@@ -37,22 +40,9 @@ const CurrentWeather = (data) => {
   const windDir = calculateWindDirection(wind_deg);
   const visibilityText = visibilityMetersOrKm(visibility);
 
-  // const styles = (theme) => ({
-  //   root: {
-  //     padding: theme.spacing(1),
-  //     [theme.breakpoints.down('md')]: {
-  //       backgroundColor: theme.palette.secondary.main,
-  //     },
-  //     [theme.breakpoints.up('md')]: {
-  //       backgroundColor: theme.palette.primary.main,
-  //     },
-  //     // [theme.breakpoints.up('lg')]: {
-  //     //   backgroundColor: green[500],
-  //     // },
-  //   },
-  // });
-
   const textTitle = { color: 'text.secondary', paddingRight: 0.5 };
+
+  const url = ``;
 
   return (
     <>
@@ -90,7 +80,7 @@ const CurrentWeather = (data) => {
                 alignItems: 'center',
               }}
             >
-              <img src={icon} alt={desc} width='100px' height='100px' />
+              <img src={svgIcon} alt={desc} width='100px' height='100px' />
               <Typography variant='h5'>{Math.round(temp)} °C</Typography>
             </Box>
             <Typography variant='subtitle1' align='center'>

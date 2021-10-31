@@ -150,7 +150,7 @@ export default function WeatherChart(data) {
             stroke='#eda31d'
             fill='url(#temperatureGradient)'
             label={renderTemperature}
-            legendType='square'
+            legendType='plainline'
           />
           <YAxis
             yAxisId={1}

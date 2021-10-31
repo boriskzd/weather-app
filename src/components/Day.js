@@ -1,16 +1,20 @@
 import { Paper, Typography } from '@mui/material';
+import { findIcon } from '../utils/icons';
 
 import { daysOfWeek } from '../utils/weatherUtils';
 
 const Day = (day) => {
-  const dayOfWeek = new Date(day.day.dt * 1000).getDay();
+  const datetime = new Date(day.day.dt * 1000);
+  const dayOfWeek = datetime.getDay();
 
   const day2 = daysOfWeek[dayOfWeek].slice(0, 3);
 
   const minTemp = Math.round(day.day.temp.min);
   const maxTemp = Math.round(day.day.temp.max);
   const weather = day.day.weather[0].description;
-  const icon = `https://openweathermap.org/img/wn/${day.day.weather[0].icon}@2x.png`;
+  // const icon = `https://openweathermap.org/img/wn/${day.day.weather[0].icon}@2x.png`;
+
+  const svgIcon = findIcon(day.day.weather[0]);
 
   return (
     <Paper variant='outlined' sx={{ width: 80, marginBottom: '5px' }}>
@@ -21,7 +25,8 @@ const Day = (day) => {
       </Typography>
 
       <div style={{ width: '100%' }}>
-        <img src={icon} alt={weather} width='80px' height='80px' />
+        {/* <img src={icon} alt={weather} width='80px' height='80px' /> */}
+        <img src={svgIcon} alt={weather} width='80px' height='80px' />
       </div>
 
       <Typography
