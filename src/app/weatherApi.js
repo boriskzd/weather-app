@@ -7,9 +7,8 @@ export const weatherApi = createApi({
   }),
   endpoints: (builder) => ({
     getWeatherByCity: builder.query({
-      // query: (name) => `pokemon/${getPokemonByName}`,
-      query: (latLong) =>
-        `data/2.5/onecall?lat=${latLong.lat}&lon=${latLong.lon}&units=metric&exclude=minutely&appid=bfd623391de7c5ae0f4979b6a11b1f77`,
+      query: (position) =>
+        `data/2.5/onecall?lat=${position.lat}&lon=${position.lon}&units=metric&exclude=minutely&appid=bfd623391de7c5ae0f4979b6a11b1f77`,
     }),
     getCities: builder.query({
       query: (city) =>

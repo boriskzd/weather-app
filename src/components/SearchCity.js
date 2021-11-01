@@ -8,6 +8,7 @@ import { setCurrentLocation } from '../app/weatherSlice';
 
 const SearchCity = () => {
   const [searchCity, setSearchCity] = useState('');
+  const [userTyped, setUserTyped] = useState(false);
 
   const {
     data,
@@ -27,6 +28,7 @@ const SearchCity = () => {
   }
 
   const handleTyping = (event) => {
+    setUserTyped(true);
     setSearchCity(event.target.value);
   };
 
@@ -39,7 +41,6 @@ const SearchCity = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: select first option when clicking enter
   };
 
   return (
