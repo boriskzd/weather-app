@@ -9,13 +9,9 @@ import Thunder from '../assets/amcharts_weather_icons_1_0_0/animated/thunder.svg
 import CloudyAtmosphere from '../assets/amcharts_weather_icons_1_0_0/animated/cloudy.svg';
 import Weather from '../assets/amcharts_weather_icons_1_0_0/animated/weather.svg';
 // icons are from: https://www.amcharts.com/free-animated-svg-weather-icons/
-// weather condigitons: https://openweathermap.org/weather-conditions
+// weather conditions: https://openweathermap.org/weather-conditions
 
 export const findIcon = (typeOfWeather) => {
-  console.log(
-    `${typeOfWeather.icon} - ${typeOfWeather.main} - ${typeOfWeather.description}`
-  );
-
   let icon = null;
 
   switch (typeOfWeather.main) {
@@ -47,7 +43,7 @@ export const findIcon = (typeOfWeather) => {
           icon = Rainy6;
           break;
         default:
-          console.log('D E F A U L T - Rain');
+          icon = Weather;
       }
       break;
     case 'Clouds':
@@ -63,7 +59,7 @@ export const findIcon = (typeOfWeather) => {
           icon = Cloudy3;
           break;
         default:
-          console.log('D E F A U L T - Clouds');
+          icon = Weather;
       }
       break;
     case 'Snow':
@@ -75,14 +71,12 @@ export const findIcon = (typeOfWeather) => {
     case 'Dust':
     case 'Fog':
     case 'Sand':
-    case 'Dust':
     case 'Ash':
     case 'Squall':
     case 'Tornado':
       icon = CloudyAtmosphere;
       break;
     default:
-      console.log('D E F A U L T');
       icon = Weather;
   }
 

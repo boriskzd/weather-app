@@ -12,13 +12,13 @@ import {
   Tooltip,
 } from 'recharts';
 
-export default function WeatherChart(data) {
-  let newData = data.data.slice(0, 24);
+export default function WeatherChart(props) {
+  let hourlyWeather = props.data.slice(0, 24);
 
   let minTemp = 100;
   let maxTemp = -100;
 
-  newData = newData.map((obj) => {
+  hourlyWeather = hourlyWeather.map((obj) => {
     let newObj = {};
     newObj.temp = Math.round(obj.temp);
     newObj.rain = Math.round(obj.pop * 100);
@@ -39,15 +39,7 @@ export default function WeatherChart(data) {
   minTemp -= tempDiff;
   maxTemp += tempDiff;
 
-  const renderTemperature = ({
-    payload,
-    x,
-    y,
-    width,
-    height,
-    value,
-    index,
-  }) => {
+  const renderTemperature = ({ x, y, value, index }) => {
     let text = null;
 
     if (index % 3 === 0 && index !== 0)
@@ -121,7 +113,7 @@ export default function WeatherChart(data) {
         <ComposedChart
           width={660}
           height={250}
-          data={newData}
+          data={hourlyWeather}
           margin={{
             top: 20,
             right: -25,

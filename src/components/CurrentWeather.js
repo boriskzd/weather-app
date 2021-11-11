@@ -8,18 +8,15 @@ import {
 } from '../utils/weatherUtils';
 import { findIcon } from '../utils/icons';
 
-const CurrentWeather = (data) => {
+const CurrentWeather = (props) => {
   const currentLocation = useSelector((state) => state.weather);
 
   const cityName = `${currentLocation.name}, ${currentLocation.country}`;
-  // console.log(data.data);
-  const icon = `https://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`;
-  const svgIcon = findIcon(data.data.weather[0]);
-
-  const desc = data.data.weather[0].description;
+  // const icon = `https://openweathermap.org/img/wn/${props.data.weather[0].icon}@2x.png`; // original icons from https://openweathermap.org/weather-conditions
+  const svgIcon = findIcon(props.data.weather[0]);
+  const desc = props.data.weather[0].description;
   const descSentence = desc[0].toUpperCase() + desc.slice(1);
-
-  const today = new Date(data.data.dt * 1000);
+  const today = new Date(props.data.dt * 1000);
   const currentDayOfWeek = daysOfWeek[today.getDay()];
   const dayOfMonth = today.getDate();
   const month = today.getMonth();
@@ -34,15 +31,12 @@ const CurrentWeather = (data) => {
     wind_speed,
     wind_deg,
     visibility,
-  } = data.data;
+  } = props.data;
 
-  // console.log(data);
   const windDir = calculateWindDirection(wind_deg);
   const visibilityText = visibilityMetersOrKm(visibility);
 
   const textTitle = { color: 'text.secondary', paddingRight: 0.5 };
-
-  const url = ``;
 
   return (
     <>

@@ -16,9 +16,6 @@ const SearchCity = () => {
 
   let array = [];
 
-  // console.log('loading: ', isLoading);
-  // console.log(data);
-
   if (!isLoading && data !== undefined) {
     array = data;
   }
@@ -29,9 +26,6 @@ const SearchCity = () => {
   };
 
   const handleSelect = (e, value) => {
-    console.log('handle select');
-    console.log(value);
-    console.log(value.lat);
     dispatch(setCurrentLocation(value));
   };
 

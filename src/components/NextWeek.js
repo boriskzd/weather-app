@@ -2,9 +2,7 @@ import { Box } from '@mui/material';
 
 import Day from './Day';
 
-// import { useSelector } from 'react-redux';
-
-export default function NextWeek(data) {
+export default function NextWeek(props) {
   return (
     <Box
       sx={{
@@ -16,7 +14,7 @@ export default function NextWeek(data) {
         marginTop: '10px',
       }}
     >
-      {data.data.daily.map((day) => {
+      {props.data.daily.map((day) => {
         return <Day day={day} key={day.dt} />;
       })}
     </Box>

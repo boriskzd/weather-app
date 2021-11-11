@@ -10,31 +10,21 @@ import {
 import SearchCity from './SearchCity';
 import CurrentWeather from './CurrentWeather';
 import WeatherChart from './WeatherChart';
+import NextWeek from './NextWeek';
 
 import { useGetWeatherByCityQuery } from '../store/weatherApi';
 import { useSelector } from 'react-redux';
-import NextWeek from './NextWeek';
 
 export default function Weather() {
-  const position = useSelector((state) => state.weather);
+  const position = useSelector((state) => state.weather); // coordinates of city
 
-  const { data, error, isLoading } = useGetWeatherByCityQuery(position);
-
-  console.log(`error: ${error}, isLoading: ${isLoading}`);
-  // console.log('data');
-  // console.log(data);
+  const { data, isLoading } = useGetWeatherByCityQuery(position);
 
   const loadingHtml = (
     <div style={{ color: 'white', textAlign: 'center' }}>
       <div>Loading...</div>
     </div>
   );
-
-  if (error) {
-    console.log('error');
-    console.error('aaaaaaaa');
-    console.log('error end');
-  }
 
   if (isLoading) return loadingHtml;
 
