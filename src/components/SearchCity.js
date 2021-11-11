@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import { Autocomplete, Box, Paper, TextField } from '@mui/material';
 
-import { useGetCitiesQuery } from '../app/weatherApi';
+import { useGetCitiesQuery } from '../store/weatherApi';
 import { useDispatch } from 'react-redux';
 
-import { setCurrentLocation } from '../app/weatherSlice';
+import { setCurrentLocation } from '../store/weatherSlice';
 
 const SearchCity = () => {
   const [searchCity, setSearchCity] = useState('');
-  const [userTyped, setUserTyped] = useState(false);
+  const [skip, setSkip] = useState(true);
 
-  const {
-    data,
-    // error,
-    isLoading,
-  } = useGetCitiesQuery(searchCity);
+  const { data, isLoading } = useGetCitiesQuery(searchCity, { skip });
 
   const dispatch = useDispatch();
 
@@ -28,7 +24,7 @@ const SearchCity = () => {
   }
 
   const handleTyping = (event) => {
-    setUserTyped(true);
+    setSkip(false);
     setSearchCity(event.target.value);
   };
 

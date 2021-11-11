@@ -11,7 +11,7 @@ import SearchCity from './SearchCity';
 import CurrentWeather from './CurrentWeather';
 import WeatherChart from './WeatherChart';
 
-import { useGetWeatherByCityQuery } from '../app/weatherApi';
+import { useGetWeatherByCityQuery } from '../store/weatherApi';
 import { useSelector } from 'react-redux';
 import NextWeek from './NextWeek';
 
