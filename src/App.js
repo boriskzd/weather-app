@@ -1,19 +1,25 @@
-import React from 'react';
-import { Box, Container, CssBaseline } from '@mui/material';
+import React from "react";
+import { Box, Container, CssBaseline } from "@mui/material";
 
-import Weather from './components/Weather';
+import Weather from "./components/Weather";
 
 function App() {
-  return (
-    <>
-      <CssBaseline />
-      <Box sx={{ backgroundColor: '#012454', paddingBottom: '24px' }}>
-        <Container maxWidth='sm'>
-          <Weather />
-        </Container>
-      </Box>
-    </>
-  );
+	return (
+		<>
+			<CssBaseline />
+			<Box
+				sx={{
+					height: "100vh",
+					backgroundColor: "#012454",
+					paddingBottom: "24px",
+				}}
+			>
+				<Container maxWidth="sm">
+					<Weather />
+				</Container>
+			</Box>
+		</>
+	);
 }
 
 export default App;
