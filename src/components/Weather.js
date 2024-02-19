@@ -4,6 +4,7 @@ import {
 	Chip,
 	Divider,
 	Paper,
+	Skeleton,
 	Typography,
 } from "@mui/material";
 
@@ -14,35 +15,26 @@ import NextWeek from "./NextWeek";
 
 import { useGetWeatherByCityQuery } from "../store/weatherApi";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export default function Weather() {
 	const position = useSelector((state) => state.weather); // coordinates of city
 
 	const { data, isLoading } = useGetWeatherByCityQuery(position);
 
-	const loadingHtml = (
-		<div style={{ color: "white", textAlign: "center" }}>
-			<div>Loading...</div>
-		</div>
-	);
+	// TESTING, ARTIFICIAL 2 SECOND WAIT
+	// TESTING, ARTIFICIAL 2 SECOND WAIT
 
-	if (isLoading) return loadingHtml;
+	// const [isLoading, setIsLoading] = useState(true);
+	// useEffect(() => {
+	// 	// Stiumulate API Call
+	// 	setTimeout(() => {
+	// 		setIsLoading(false);
+	// 	}, 6000);
+	// }, []);
 
-	const isLoadingSkeleton = (
-		<Card>
-			<CardContent>
-				<CurrentWeather data={data.current} />
-
-				<WeatherChart data={data.hourly} />
-
-				<Divider>
-					<Chip label="Next 7 days" size="small" />
-				</Divider>
-
-				<NextWeek data={data} />
-			</CardContent>
-		</Card>
-	);
+	// TESTING, ARTIFICIAL 2 SECOND WAIT
+	// TESTING, ARTIFICIAL 2 SECOND WAIT
 
 	return (
 		<>
@@ -58,15 +50,30 @@ export default function Weather() {
 			<Paper elevation={0}>
 				<Card>
 					<CardContent>
-						<CurrentWeather data={data.current} />
+						{isLoading ? (
+							<Skeleton height={160} />
+						) : (
+							<CurrentWeather data={data.current} />
+						)}
 
-						<WeatherChart data={data.hourly} />
+						<Divider>
+							<Chip label={`Next 24 hours`} size="small" />
+						</Divider>
+
+						{isLoading ? (
+							<Skeleton height={250} />
+						) : (
+							<WeatherChart data={data.hourly} />
+						)}
 
 						<Divider>
 							<Chip label="Next 7 days" size="small" />
 						</Divider>
-
-						<NextWeek data={data} />
+						{isLoading ? (
+							<Skeleton height={195} />
+						) : (
+							<NextWeek data={data} />
+						)}
 					</CardContent>
 				</Card>
 			</Paper>
