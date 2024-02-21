@@ -1,3 +1,4 @@
+import { Skeleton } from "@mui/material";
 import {
 	CartesianGrid,
 	Legend,
@@ -11,6 +12,10 @@ import {
 } from "recharts";
 
 export default function WeatherChart(props) {
+	if (props.isLoading) {
+		return <Skeleton variant="rectangular" height={250} />;
+	}
+
 	let hourlyWeather = props.data.slice(0, 24);
 
 	let minTemp = 100;
@@ -108,91 +113,98 @@ export default function WeatherChart(props) {
 		return [nameHtml];
 	};
 
+	console.log(props.isLoading);
+	const isLoading = props.isLoading;
+
 	return (
 		<>
-			<ResponsiveContainer width="100%" height={250}>
-				<ComposedChart
-					width={660}
-					height={250}
-					data={hourlyWeather}
-					margin={{
-						top: 20,
-						right: -25,
-						left: -30,
-						bottom: 10,
-					}}
-				>
-					{/* Temperature  */}
-					<defs>
-						<linearGradient
-							id="temperatureGradient"
-							x1="0"
-							y1="0"
-							x2="0"
-							y2="1"
-						>
-							<stop
-								offset="5%"
-								stopColor="#fec821"
-								stopOpacity={0.8}
-							/>
-							<stop
-								offset="95%"
-								stopColor="#eda31d"
-								stopOpacity={0}
-							/>
-						</linearGradient>
-					</defs>
-					<Area
-						yAxisId={1}
-						dataKey="temp"
-						name="Temperature °C"
-						type="monotone"
-						stroke="#eda31d"
-						fill="url(#temperatureGradient)"
-						label={renderTemperature}
-						legendType="plainline"
-					/>
-					<YAxis
-						yAxisId={1}
-						domain={[minTemp, maxTemp]}
-						allowDecimals={false}
-						// label={{ value: 'Temp °C', angle: -90 }}
-					/>
+			{isLoading ? (
+				<Skeleton variant="rectangular" height={250} />
+			) : (
+				<ResponsiveContainer width="100%" height={250}>
+					<ComposedChart
+						width={660}
+						height={250}
+						data={hourlyWeather}
+						margin={{
+							top: 20,
+							right: -25,
+							left: -30,
+							bottom: 10,
+						}}
+					>
+						{/* Temperature  */}
+						<defs>
+							<linearGradient
+								id="temperatureGradient"
+								x1="0"
+								y1="0"
+								x2="0"
+								y2="1"
+							>
+								<stop
+									offset="5%"
+									stopColor="#fec821"
+									stopOpacity={0.8}
+								/>
+								<stop
+									offset="95%"
+									stopColor="#eda31d"
+									stopOpacity={0}
+								/>
+							</linearGradient>
+						</defs>
+						<Area
+							yAxisId={1}
+							dataKey="temp"
+							name="Temperature °C"
+							type="monotone"
+							stroke="#eda31d"
+							fill="url(#temperatureGradient)"
+							label={renderTemperature}
+							legendType="plainline"
+						/>
+						<YAxis
+							yAxisId={1}
+							domain={[minTemp, maxTemp]}
+							allowDecimals={false}
+							// label={{ value: 'Temp °C', angle: -90 }}
+						/>
 
-					{/* Chance of Rain  */}
-					<Line
-						yAxisId={2}
-						dataKey="rain"
-						name="Precipitation %"
-						type="monotone"
-						label={renderPrecipitation}
-						stroke="rgb(49, 130, 189)"
-						dot={{ r: 2 }}
-					/>
-					<YAxis
-						yAxisId={2}
-						domain={[0, 100]}
-						// label={{ value: 'Chance of Rain', angle: -90 }}
-						orientation="right"
-					/>
+						{/* Chance of Rain  */}
+						<Line
+							yAxisId={2}
+							dataKey="rain"
+							name="Precipitation %"
+							type="monotone"
+							label={renderPrecipitation}
+							stroke="rgb(49, 130, 189)"
+							dot={{ r: 2 }}
+						/>
+						<YAxis
+							yAxisId={2}
+							domain={[0, 100]}
+							// label={{ value: 'Chance of Rain', angle: -90 }}
+							orientation="right"
+						/>
 
-					{/* Time  */}
-					<CartesianGrid strokeDasharray="3 6" />
-					<XAxis dataKey="time" interval={2} tick={renderTime} />
+						{/* Time  */}
+						<CartesianGrid strokeDasharray="3 6" />
+						<XAxis dataKey="time" interval={2} tick={renderTime} />
 
-					{/* Other */}
-					<Legend />
-					<Tooltip
-						labelFormatter={(value, name, props) =>
-							`Time: ${value}:00 h`
-						}
-						formatter={(value, name, props) =>
-							renderTooltipFormatter(value, name)
-						}
-					/>
-				</ComposedChart>
-			</ResponsiveContainer>
+						{/* Other */}
+						<Legend />
+						<Tooltip
+							labelFormatter={(value, name, props) =>
+								`Time: ${value}:00 h`
+							}
+							formatter={(value, name, props) =>
+								renderTooltipFormatter(value, name)
+							}
+						/>
+					</ComposedChart>
+				</ResponsiveContainer>
+			)}
 		</>
 	);
 }

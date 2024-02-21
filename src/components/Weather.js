@@ -60,11 +60,10 @@ export default function Weather() {
 							<Chip label={`Next 24 hours`} size="small" />
 						</Divider>
 
-						{isLoading ? (
-							<Skeleton variant="rounded" height={250} />
-						) : (
-							<WeatherChart data={data.hourly} />
-						)}
+						<WeatherChart
+							data={data?.hourly}
+							isLoading={isLoading}
+						/>
 
 						<Divider sx={{ m: 0.5 }}>
 							<Chip label="Next 7 days" size="small" />
