@@ -21,13 +21,13 @@ export default function NextWeek(props) {
 							sx={{
 								marginBottom: "5px",
 							}}
+							key={index}
 						>
 							<Skeleton
 								// variant="rounded"
 								variant="rounded"
 								height={163}
 								width={80}
-								key={index}
 							/>
 						</Box>
 				  ))
