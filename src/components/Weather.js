@@ -30,7 +30,7 @@ export default function Weather() {
 	// 	// Stiumulate API Call
 	// 	setTimeout(() => {
 	// 		setIsLoading(false);
-	// 	}, 6000);
+	// 	}, 3000);
 	// }, []);
 
 	// TESTING, ARTIFICIAL 2 SECOND WAIT
@@ -51,29 +51,26 @@ export default function Weather() {
 				<Card>
 					<CardContent>
 						{isLoading ? (
-							<Skeleton height={160} />
+							<Skeleton variant="rounded" height={160} />
 						) : (
 							<CurrentWeather data={data.current} />
 						)}
 
-						<Divider>
+						<Divider sx={{ m: 0.5 }}>
 							<Chip label={`Next 24 hours`} size="small" />
 						</Divider>
 
 						{isLoading ? (
-							<Skeleton height={250} />
+							<Skeleton variant="rounded" height={250} />
 						) : (
 							<WeatherChart data={data.hourly} />
 						)}
 
-						<Divider>
+						<Divider sx={{ m: 0.5 }}>
 							<Chip label="Next 7 days" size="small" />
 						</Divider>
-						{isLoading ? (
-							<Skeleton height={195} />
-						) : (
-							<NextWeek data={data} />
-						)}
+
+						<NextWeek data={data} isLoading={isLoading} />
 					</CardContent>
 				</Card>
 			</Paper>
