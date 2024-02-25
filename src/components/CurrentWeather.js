@@ -5,7 +5,8 @@ import {
 	months,
 	calculateWindDirection,
 	visibilityMetersOrKm,
-} from "../utils/weatherUtils";
+	getCurrentDate, // in format "DayOfWeek, Month Day" --> "Monday, February 25"
+} from "../utils/timeAndWeatherUtils";
 import { findIcon } from "../utils/icons";
 
 const CurrentWeather = (props) => {

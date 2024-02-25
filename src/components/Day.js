@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
 import { findIcon } from "../utils/icons";
 
-import { daysOfWeek } from "../utils/weatherUtils";
+import { daysOfWeek } from "../utils/timeAndWeatherUtils";
 
 const Day = (day) => {
 	const datetime = new Date(day.day.dt * 1000);
