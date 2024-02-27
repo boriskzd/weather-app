@@ -9,7 +9,8 @@ function App() {
 			<CssBaseline />
 			<Box
 				sx={{
-					height: "100vh",
+					minHeight: "100vh",
+					height: "100%",
 					backgroundColor: "#012454",
 					paddingBottom: "24px",
 				}}
