@@ -15,26 +15,11 @@ import NextWeek from "./NextWeek";
 
 import { useGetWeatherByCityQuery } from "../store/weatherApi";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 
 export default function Weather() {
 	const position = useSelector((state) => state.weather); // coordinates of city
 
 	const { data, isLoading } = useGetWeatherByCityQuery(position);
-
-	// TESTING, ARTIFICIAL 2 SECOND WAIT
-	// TESTING, ARTIFICIAL 2 SECOND WAIT
-
-	// const [isLoading, setIsLoading] = useState(true);
-	// useEffect(() => {
-	// 	// Stiumulate API Call
-	// 	setTimeout(() => {
-	// 		setIsLoading(false);
-	// 	}, 3000);
-	// }, []);
-
-	// TESTING, ARTIFICIAL 2 SECOND WAIT
-	// TESTING, ARTIFICIAL 2 SECOND WAIT
 
 	return (
 		<>
@@ -50,11 +35,10 @@ export default function Weather() {
 			<Paper elevation={0}>
 				<Card>
 					<CardContent>
-						{isLoading ? (
-							<Skeleton variant="rounded" height={160} />
-						) : (
-							<CurrentWeather data={data.current} />
-						)}
+						<CurrentWeather
+							data={data?.current}
+							isLoading={isLoading}
+						/>
 
 						<Divider sx={{ m: 0.5 }}>
 							<Chip label={`Next 24 hours`} size="small" />

@@ -61,8 +61,8 @@ export const months = [
 	"December",
 ];
 
-export const getCurrentDate = (props) => {
-	const today = new Date(props.data.dt * 1000);
+export const getCurrentDate = (data) => {
+	const today = new Date(data.dt * 1000);
 	const currentDayOfWeek = daysOfWeek[today.getDay()];
 	const dayOfMonth = today.getDate();
 	const month = today.getMonth();

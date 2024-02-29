@@ -8,6 +8,7 @@ import Snow from "../assets/weather-icons-svg/snowy-3.svg";
 import Thunder from "../assets/weather-icons-svg/thunder.svg";
 import CloudyAtmosphere from "../assets/weather-icons-svg/cloudy.svg";
 import Weather from "../assets/weather-icons-svg/weather.svg";
+
 // icons are from: https://www.amcharts.com/free-animated-svg-weather-icons/
 // weather conditions: https://openweathermap.org/weather-conditions
 

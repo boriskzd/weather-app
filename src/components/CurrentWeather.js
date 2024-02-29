@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import {
 	daysOfWeek,
@@ -8,20 +8,105 @@ import {
 	getCurrentDate, // in format "DayOfWeek, Month Day" --> "Monday, February 25"
 } from "../utils/timeAndWeatherUtils";
 import { findIcon } from "../utils/icons";
+import { capitalizeFirstLetter } from "../utils/utils";
 
-const CurrentWeather = (props) => {
+const redBorder = { border: "1px solid red" };
+
+// skeleton that is based on original code from render()
+const displaySkeleton = () => {
+	// text skeleton, it displays 6 times, for wind, humidity, visibility, pressure, dew point and UV
+	const skeletonTextCss = (
+		<Skeleton variant="text" sx={{ marginRight: { xs: 0, xs: 1 } }} />
+	);
+
+	return (
+		<>
+			<Grid container justifyContent="space-between">
+				<Grid item>
+					<Typography variant="h5">
+						<Skeleton variant="text" width={130} />
+					</Typography>
+				</Grid>
+				<Grid item>
+					<Typography
+						variant="subtitle2"
+						sx={{ color: "text.secondary" }}
+					>
+						<Skeleton variant="text" width={100} />
+					</Typography>
+				</Grid>
+			</Grid>
+			<Grid container alignItems="center">
+				<Grid item xs={12} sm={4}>
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+						}}
+					>
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "row",
+								alignItems: "center",
+							}}
+						>
+							<Skeleton
+								variant="rounded"
+								height={100}
+								width={100}
+							/>
+							<Typography variant="h5">
+								<Skeleton
+									variant="text"
+									width={50}
+									sx={{ marginLeft: 0.5 }}
+								/>
+							</Typography>
+						</Box>
+						<Typography variant="subtitle1" align="center">
+							<Skeleton variant="text" width={120} />
+						</Typography>
+					</Box>
+				</Grid>
+
+				<Grid item xs={12} sm={8}>
+					<Grid container sx={{ paddingLeft: 2 }}>
+						<Grid item xs={6} sm={6}>
+							<Box>{skeletonTextCss}</Box>
+							<Box>{skeletonTextCss}</Box>
+							<Box>{skeletonTextCss}</Box>
+						</Grid>
+						<Grid item xs={6} sm={6}>
+							<Box>
+								<Box>{skeletonTextCss}</Box>
+							</Box>
+							<Box>
+								<Box>{skeletonTextCss}</Box>
+							</Box>
+							<Box>
+								<Box>{skeletonTextCss}</Box>
+							</Box>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Grid>
+		</>
+	);
+};
+
+const CurrentWeather = ({ data, isLoading }) => {
 	const currentLocation = useSelector((state) => state.weather);
 
+	if (isLoading) return displaySkeleton();
+
+	// original icons from https://openweathermap.org/weather-conditions
+	const svgIcon = findIcon(data.weather[0]);
+	const desc = data.weather[0].description;
 	const cityName = `${currentLocation.name}, ${currentLocation.country}`;
-	// const icon = `https://openweathermap.org/img/wn/${props.data.weather[0].icon}@2x.png`; // original icons from https://openweathermap.org/weather-conditions
-	const svgIcon = findIcon(props.data.weather[0]);
-	const desc = props.data.weather[0].description;
-	const descSentence = desc[0].toUpperCase() + desc.slice(1);
-	const today = new Date(props.data.dt * 1000);
-	const currentDayOfWeek = daysOfWeek[today.getDay()];
-	const dayOfMonth = today.getDate();
-	const month = today.getMonth();
-	const dateText = `${currentDayOfWeek}, ${months[month]} ${dayOfMonth}`;
+	const descSentence = capitalizeFirstLetter(desc);
+	const dateText = getCurrentDate(data);
 
 	const {
 		temp,
@@ -32,7 +117,7 @@ const CurrentWeather = (props) => {
 		wind_speed,
 		wind_deg,
 		visibility,
-	} = props.data;
+	} = data;
 
 	const windDir = calculateWindDirection(wind_deg);
 	const visibilityText = visibilityMetersOrKm(visibility);
@@ -93,7 +178,6 @@ const CurrentWeather = (props) => {
 						</Box>
 						<Typography variant="subtitle1" align="center">
 							{descSentence}
-							{/* Feels like {Math.round(feels_like)} °C. */}
 						</Typography>
 					</Box>
 				</Grid>
