@@ -1,8 +1,6 @@
 import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import {
-	daysOfWeek,
-	months,
 	calculateWindDirection,
 	visibilityMetersOrKm,
 	getCurrentDate, // in format "DayOfWeek, Month Day" --> "Monday, February 25"
@@ -10,14 +8,10 @@ import {
 import { findIcon } from "../utils/icons";
 import { capitalizeFirstLetter } from "../utils/utils";
 
-const redBorder = { border: "1px solid red" };
-
 // skeleton that is based on original code from render()
 const displaySkeleton = () => {
 	// text skeleton, it displays 6 times, for wind, humidity, visibility, pressure, dew point and UV
-	const skeletonTextCss = (
-		<Skeleton variant="text" sx={{ marginRight: { xs: 0, xs: 1 } }} />
-	);
+	const skeletonTextCss = <Skeleton variant="text" sx={{ marginRight: 1 }} />;
 
 	return (
 		<>
